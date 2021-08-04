@@ -19,6 +19,10 @@ audio.src = &quot;sound/son_ambiance_intro.mp3&quot;;
 var audio2 = new Audio(&#39;sound/bip_out.mp3&#39;);
 audio2.volume = 0.2;
 
+var audio_montagne = new Audio();
+audio_montagne.src = &quot;sound/montagne_1.mp3&quot;;
+audio_montagne.volume = 0.4;
+
 var audio_desert = new Audio();
 audio_desert.src = &quot;sound/desert_1.mp3&quot;;
 audio_desert.volume = 0.4;
@@ -45,7 +49,7 @@ Vous êtes perdu, autant mentalement que géographiquement, votre but est simple
 (set: $attendu_fin_journee to false)
 (set: $ia to (datamap: &quot;name&quot;, &quot;IA&quot;, &quot;isCarried&quot;, false))
 (set: $gourde to (datamap: &quot;name&quot;, &quot;Gourde&quot;, &quot;isCarried&quot;, false))
-(set: $soulier to (datamap: &quot;name&quot;, &quot;Chaussures&quot;, &quot;isCarried&quot;, false))</tw-passagedata><tw-passagedata pid="2" name="Jouer" tags="" position="723,324" size="100,100">(if:(history: )&#39;s length &lt; 2)[
+(set: $soulier to (datamap: &quot;name&quot;, &quot;Chaussures&quot;, &quot;isCarried&quot;, false))</tw-passagedata><tw-passagedata pid="2" name="Jouer" tags="" position="725,325" size="100,100">(if:(history: )&#39;s length &lt; 2)[
 *BIP BIP BIP BIP BIP*
 (link: &quot;Se réveiller&quot;)[(replace:?c0)[
 Réveillé par son strident et répétitif semblable à une alarme, vous ouvrez péniblement les yeux.
@@ -67,6 +71,9 @@ audio_foret.pause();
 }
 if(audio_desert.ended == false){
 audio_desert.pause();
+}
+if(audio_montagne.ended == false){
+audio_montagne.pause();
 }
 &lt;/script&gt;
 Vous êtes devant votre vaisseau, que voulez vous faire ?
@@ -92,7 +99,9 @@ Vous ne vous relevez pas et mourrez seul.
 [
  Vous êtes dans le desert.
  [[Retourner au vaisseau-&gt;Jouer]]
-]</tw-passagedata><tw-passagedata pid="4" name="Chaine de Montagnes" tags="" position="607,480" size="100,100">
+]</tw-passagedata><tw-passagedata pid="4" name="Chaine de Montagnes" tags="" position="607,480" size="100,100">&lt;script&gt;
+audio_montagne.play();
+&lt;/script&gt;
 [[Retourner au vaisseau-&gt;Jouer]]</tw-passagedata><tw-passagedata pid="5" name="Forêt de Champignole" tags="" position="982,479" size="100,100">&lt;script&gt;
 audio_foret.play();
 &lt;/script&gt;
