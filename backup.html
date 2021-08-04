@@ -16,14 +16,7 @@ var audio = new Audio();
 audio.src = &quot;sound/son_ambiance_intro.mp3&quot;;
 
 var audio2 = new Audio(&#39;sound/bip_out.mp3&#39;);
-audio2.volume = 0.2;
-
-var audio_desert = new Audio();
-audio_desert.src = &quot;sound/desert_1.mp3&quot;;
-audio_desert.volume = 0.4;
-
-var audio_foret = new Audio();
-audio_foret.src = &quot;sound/foret_2.mp3&quot;;
+audio2.volume = 0.5;
 
 function runMusic(){
 	audio.play();
@@ -44,7 +37,7 @@ Vous êtes perdu, autant mentalement que géographiquement, votre but est simple
 (set: $attendu_fin_journee to false)
 (set: $ia to (datamap: &quot;name&quot;, &quot;IA&quot;, &quot;isCarried&quot;, false))
 (set: $gourde to (datamap: &quot;name&quot;, &quot;Gourde&quot;, &quot;isCarried&quot;, false))
-(set: $soulier to (datamap: &quot;name&quot;, &quot;Chaussures&quot;, &quot;isCarried&quot;, false))</tw-passagedata><tw-passagedata pid="2" name="Jouer" tags="" position="723,324" size="100,100">(if:(history: )&#39;s length &lt; 2)[
+(set: $soulier to (datamap: &quot;name&quot;, &quot;Chaussures&quot;, &quot;isCarried&quot;, false))</tw-passagedata><tw-passagedata pid="2" name="Jouer" tags="" position="724,324" size="100,100">(if:(history: )&#39;s length &lt; 2)[
 *BIP BIP BIP BIP BIP*
 (link: &quot;Se réveiller&quot;)[(replace:?c0)[
 Réveillé par son strident et répétitif semblable à une alarme, vous ouvrez péniblement les yeux.
@@ -60,14 +53,6 @@ Vous voyez débuter à quelques kilomètres de là une grande chaîne de montagn
 [[Fouiller le vaisseau]]]
 ]]]]]]]]
 (else:)[
-&lt;script&gt;
-if(audio_foret.ended == false){
-audio_foret.pause();
-}
-if(audio_desert.ended == false){
-audio_desert.pause();
-}
-&lt;/script&gt;
 Vous êtes devant votre vaisseau, que voulez vous faire ?
 
 [[Grand Désert]]
@@ -79,6 +64,8 @@ Vous êtes devant votre vaisseau, que voulez vous faire ?
 []&lt;c4|
 </tw-passagedata><tw-passagedata pid="3" name="Grand Désert" tags="" position="420,486" size="100,100">&lt;script&gt;
 audio.pause();
+var audio_desert = new Audio();
+audio_desert.src = &quot;sound/desert_1.mp3&quot;;
 audio_desert.play();
 &lt;/script&gt;
 (if: $attendu_fin_journee is false)[
@@ -91,10 +78,7 @@ Vous ne vous relevez pas et mourrez seul.
 [
  Vous êtes dans le desert.
  [[Retourner au vaisseau-&gt;Jouer]]
-]</tw-passagedata><tw-passagedata pid="4" name="Chaine de Montagnes" tags="" position="607,480" size="100,100">
-[[Retourner au vaisseau-&gt;Jouer]]</tw-passagedata><tw-passagedata pid="5" name="Forêt de Champignole" tags="" position="982,479" size="100,100">&lt;script&gt;
-audio_foret.play();
-&lt;/script&gt;
+]</tw-passagedata><tw-passagedata pid="4" name="Chaine de Montagnes" tags="" position="607,480" size="100,100">[[Retourner au vaisseau-&gt;Jouer]]</tw-passagedata><tw-passagedata pid="5" name="Forêt de Champignole" tags="" position="1085,489" size="100,100">(if: $gourde&#39;s isCarried is true)[(set: $time to 14)]
 (link:&quot;Attendre fin de journée&quot;)[(set: $attendu_fin_journee to true)]
 
 Vous vous dirigez vers la forêt d’arbres immenses.
@@ -106,8 +90,7 @@ Vous entendez des animaux, apercevez des oiseaux, mais rien qui ne vous inquièt
 Le chemin se précise si vous partez sur votre gauche, mais le terrain à l’air de plus en plus humide vers votre droite, peut-être qu’un point d’eau se trouve dans cette direction.
 Que faites vous ?
 
-[[Retourner au vaisseau-&gt;Jouer]]
-</tw-passagedata><tw-passagedata pid="6" name="Fouiller le vaisseau" tags="" position="798,484" size="100,100">&lt;script&gt;
+[[Retourner au vaisseau-&gt;Jouer]]</tw-passagedata><tw-passagedata pid="6" name="Fouiller le vaisseau" tags="" position="798,484" size="100,100">&lt;script&gt;
 if(audio2.ended == false){
 audio2.pause();}
 var bip_in = new Audio(&quot;sound/bip_in.mp3&quot;);
@@ -130,34 +113,34 @@ Vous tentez de désactiver l’alarme tant bien que mal quand tout à coup celle
 Paniqué vous commencez à bondir en direction de la sortie, quand tout à coup la voix robotique dit sur un ton enjoué :
 (link: &quot;Suite..&quot;)[(replace:?c6)[
 (dialog: &quot;Boum !
-Aaaaaah vous les humains vous êtes si faciles à terroriser, c’est presque plus drôle à force&quot;)(text-colour:white)[Voix : ](text-colour:yellow)[ Boum ! 
+Aaaaaah vous les humains vous êtes si faciles à terroriser, c’est presque plus drôle à force&quot;)(text-colour:white)[IA : ](text-colour:yellow)[ Boum ! 
 Aaaaaah vous les humains vous êtes si faciles à terroriser, c’est presque plus drôle à force]&lt;script&gt;bip_alert.pause();&lt;/script&gt;
 
 (text-colour:white)[Interloqué, vous vous remettez de vos emotions.]
 (link: &quot;Heuu.. Bonjours ?&quot;)[(replace:?c7)[
-(dialog: &quot;Bon jour ? Hmm ça dépend pour qui, il est vrai que je passe une journée particulièrement radieuse, mais il semblerait que ce soit pas le cas de tout le monde.&quot;, &quot;Vous êtes qu.. quoi ?&quot;)
-(align:&quot;==&gt;&quot;)+(box:&quot;=X&quot;)[Vous : (text-colour:blue)[Heuu.. Bonjours ?]]
-(text-colour:white)[Voix : ](text-colour:yellow)[Bon jour ? Hmm ça dépend pour qui, il est vrai que je passe une journée particulièrement radieuse, mais il semblerait que ce soit pas le cas de tout le monde.]
-(align:&quot;==&gt;&quot;)+(box:&quot;=X&quot;)[Vous : (text-colour:blue)[Vous êtes qu.. quoi ?]]
+(dialog: &quot;Bon jour ? Hmm ça dépend pour qui, il est vrai que je passe une journée particulièrement radieuse, mais il semblerait que ce soit pas le cas de tout le monde.&quot;, &quot;Vous êtes qu.. quoi ?&quot;)(text-colour:white)[Vous : ](text-colour:yellow)[Heuu.. Bonjours ?]
+(text-colour:white)[IA : ](text-colour:yellow)[Bon jour ? Hmm ça dépend pour qui, il est vrai que je passe une journée particulièrement radieuse, mais il semblerait que ce soit pas le cas de tout le monde.]
+(text-colour:white)[Vous : ](text-colour:yellow)[Vous êtes qu.. quoi ?]
 (dialog: &quot;Voilà qui est extrêmement intéressant ! Tu ne te souviens pas de moi ?&quot;, &quot;De pas grand choses à vrai dire…&quot;)
-(text-colour:white)[Voix : ](text-colour:yellow)[Voilà qui est extrêmement intéressant ! Tu ne te souviens pas de moi ?]
-(align:&quot;==&gt;&quot;)+(box:&quot;=X&quot;)[Vous : (text-colour:blue)[De pas grand choses à vrai dire…]]
+(text-colour:white)[IA : ](text-colour:yellow)[Voilà qui est extrêmement intéressant ! Tu ne te souviens pas de moi ?]
+(text-colour:white)[Vous : ](text-colour:yellow)[De pas grand choses à vrai dire…]
 (dialog: &quot;Mais quelle journée fantastique !&quot;, &quot;Heu..Sympa... Bon du coup&quot;)
-(text-colour:white)[Voix : ](text-colour:yellow)[Mais quelle journée fantastique !]
-(align:&quot;==&gt;&quot;)+(box:&quot;=X&quot;)[Vous : (text-colour:blue)[Heu..Sympa...]]
-(set: $reponse1 to (confirm: &quot;Bon, je te laisse me poser une seule question.&quot;, &quot;J’étais le conducteur de ce vaisseau ?&quot;, &quot;Où sommes-nous ?&quot;))(set: $dial1_0 to &quot;A ton avis le bipède ? Regarde ta tenue, c’est écrit quoi dessus ? Ouiii CIO c’est bien ! Et sur les parois autour de nous ? Encore CIO, bravoooo, j’ai rarement vu un primate aussi vif !&quot;)
-(set: $dial1_1 to &quot;Tu t’es écrasé andouille, je me demande où tu as appris à piloter d’ailleurs haha. Enfin je le sais, mais t’es nul ! Quand à l’endroit précis où nous sommes, je vais bien me garder de te le dire pour le moment.&quot;)(text-colour:white)[Voix : ](text-colour:yellow)[Bon, je te laisse me poser une seule question.]
+(text-colour:white)[IA : ](text-colour:yellow)[Mais quelle journée fantastique !]
+(text-colour:white)[Vous : ](text-colour:yellow)[Heu..Sympa... Bon du coup]
+(set: $reponse1 to (confirm: &quot;IA : Bon, je te laisse me poser une seule question.&quot;, &quot;J’étais le conducteur de ce vaisseau ?&quot;, &quot;Où sommes-nous ?&quot;))(set: $dial1_0 to &quot;A ton avis le bipède ? Regarde ta tenue, c’est écrit quoi dessus ? Ouiii CIO c’est bien ! Et sur les parois autour de nous ? Encore CIO, bravoooo, j’ai rarement vu un primate aussi vif !&quot;)
+(set: $dial1_1 to &quot;Tu t’es écrasé andouille, je me demande où tu as appris à piloter d’ailleurs haha. Enfin je le sais, mais t’es nul ! Quand à l’endroit précis où nous sommes, je vais bien me garder de te le dire pour le moment.&quot;)(text-colour:white)[IA : ](text-colour:yellow)[Bon, je te laisse me poser une seule question.]
 (if: $reponse1 is false)[(dialog: $dial1_0, &quot;Bon à part à être désagréable tu sert à quoi ?&quot;)
-(align:&quot;==&gt;&quot;)+(box:&quot;=X&quot;)[Vous : (text-colour:blue)[J’étais le conducteur de ce vaisseau ?]]
-(text-colour:white)[Voix : ](text-colour:yellow)[$dial1_0]
+(text-colour:white)[Vous : ](text-colour:yellow)[J’étais le conducteur de ce vaisseau ?]
+(text-colour:white)[IA : ](text-colour:yellow)[$dial1_0]
 ](else:)[(dialog: $dial1_1, &quot;Bon à part à être désagréable tu sert à quoi ?&quot;)
-(align:&quot;==&gt;&quot;)+(box:&quot;=X&quot;)[Vous : (text-colour:blue)[Où sommes-nous ?]]
-(text-colour:white)[Voix : ](text-colour:yellow)[$dial1_1]]
-(align:&quot;==&gt;&quot;)+(box:&quot;=X&quot;)[Vous : (text-colour:blue)[Bon à part à être désagréable tu sert à quoi ?]]
+(text-colour:white)[Vous : ](text-colour:yellow)[Où sommes-nous ?]
+(text-colour:white)[IA : ](text-colour:yellow)[$dial1_1]]
+(text-colour:white)[Vous : ](text-colour:yellow)[Bon à part à être désagréable tu sert à quoi ?]
 (text-colour:white)[&lt;hr/&gt;
 (text-colour:blue)[[Sortir du vaisseau-&gt;Jouer]]]
 ]]]]]]]]]]]]]]
-[]&lt;c1|[]&lt;c2|[]&lt;c3|[]&lt;c4|[]&lt;c5|[]&lt;c6|[]&lt;c7|</tw-passagedata></tw-storydata>
+[]&lt;c1|[]&lt;c2|[]&lt;c3|[]&lt;c4|[]&lt;c5|[]&lt;c6|[]&lt;c7|
+</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">"use strict";var _slicedToArray=function(){return function(e,t){if(Array.isArray(e))return e;if(Symbol.iterator in Object(e))return function(e,t){var n=[],r=!0,a=!1,i=void 0;try{for(var o,s=e[Symbol.iterator]();!(r=(o=s.next()).done)&&(n.push(o.value),!t||n.length!==t);r=!0);}catch(e){a=!0,i=e}finally{try{!r&&s.return&&s.return()}finally{if(a)throw i}}return n}(e,t);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e};function _defineProperty(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function _toConsumableArray(e){if(Array.isArray(e)){for(var t=0,n=Array(e.length);t<e.length;t++)n[t]=e[t];return n}return Array.from(e)}!function(){
 /**
  * @license almond 0.3.3 Copyright jQuery Foundation and other contributors.
