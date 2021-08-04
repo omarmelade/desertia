@@ -15,45 +15,61 @@
 ##&lt;a onClick=&quot;runMusic()&quot; id=&quot;jouerbtn&quot;&gt;[[Jouer]]&lt;/a&gt;
 &lt;/div&gt;
 &lt;script&gt;
-var audio = new Audio(&#39;https://cdn.pixabay.com/download/audio/2020/08/30/audio_926fbf0b66.mp3?filename=modular-ambient-04-792.mp3&#39;);
+var audio = new Audio();
+audio.src = &quot;sound/son_ambiance_intro.mp3&quot;;
 
 var audio2 = new Audio(&#39;https://www.sounddesigners.org/jdownloads/_preview_files/120526__playpauseandrewind__alarm-clock-s-alarm-on.mp3&#39;);
+audio2.volume = 0.2;
 
 function runMusic(){
 	audio.play();
-	setTimeout(function(){ audio2.play();; }, 1000);
+	setTimeout(function(){ audio2.play(); }, 1000);
 }
 &lt;/script&gt;
+
 (set: $bag to (a:))
 (set: $attendu_fin_journee to false)
 (set: $ia to (datamap: &quot;name&quot;, &quot;IA&quot;, &quot;isCarried&quot;, false))
 (set: $gourde to (datamap: &quot;name&quot;, &quot;Gourde&quot;, &quot;isCarried&quot;, false))
-(set: $soulier to (datamap: &quot;name&quot;, &quot;Chaussures&quot;, &quot;isCarried&quot;, false))</tw-passagedata><tw-passagedata pid="2" name="Jouer" tags="" position="722,324" size="100,100">*BIP BIP BIP BIP BIP*
+(set: $soulier to (datamap: &quot;name&quot;, &quot;Chaussures&quot;, &quot;isCarried&quot;, false))</tw-passagedata><tw-passagedata pid="2" name="Jouer" tags="" position="724,324" size="100,100">(if:(history: )&#39;s length &lt; 2)[
+*BIP BIP BIP BIP BIP*
 
-(link: &quot;Se réveiller&quot;)[&lt;script&gt;audio2.pause();&lt;/script&gt;(replace:?c0)[
+(link: &quot;Se réveiller&quot;)[(replace:?c0)[
 Réveillé par son strident et répétitif semblable à une alarme, vous ouvrez péniblement les yeux.
 Le soleil, déjà haut dans le ciel vous éblouis, il fait très chaud et vous avez la gorge aussi sèche que le desert aride que vous remarquez non loin de l’endroit où vous êtes étendus. L’esprit embrumé et les souvenirs flous vous réalisez tout de même que vous allez devoir vite trouver de l’eau, à moins de vous diriger vers une mort certaine.
-
 (link: &quot;Suite..&quot;)[(replace:?c1)[
 Vous avez tout d’abord l’impression que cette étendue de sable et de rochers grandit à vue d’oeil, comme si elle n’avait pas de fin, mais en vous concentrant vous distinguez à l’horizon une fine bande bleu se détachant du ciel. 
-
 (link: &quot;Suite..&quot;)[(replace:?c2)[
 Un mirage sans doute, ou peut-être un océan, qui sait ..?
 Vous vous relevez et constatez que vous êtes pieds nus. Vous êtes dans une plaine dont l’herbe est asséchée par la chaleur et à côté de vous se trouve un vaisseau en piteux état d’où provient le signal aigu qui vous a désagréablement tiré de votre profond sommeil. 
-
 (link: &quot;Suite..&quot;)[(replace:?c3)[
 Vous voyez débuter à quelques kilomètres de là une grande chaîne de montagnes dont les rochers ont l’air particulièrement tranchants et peu praticables, ainsi qu’une forêt d’arbres immenses dont la densité semble protéger efficacement des rayons brûlants du soleil, et vous constatez que les feuillages forment un genre de dôme qui vous évoque assez facilement le chapeau d’un champignon.
-
-&lt;hr/&gt;
-Vous devez prendre une décision, le soleil monte dans le ciel et vous êtes totalement asseché.
+](replace:?c4)[&lt;hr/&gt;Vous devez prendre une décision, le soleil monte dans le ciel et vous êtes totalement asseché.
 
 [[Fouiller le vaisseau]]
 [[Grand Désert]]
 [[Chaine de Montagnes]]
 [[Forêt de Champignole]]
+]
 ]]]]]]]]
+(else:)[
+Vous êtes devant votre vaisseau, que voulez vous faire ?
+
+[[Fouiller le vaisseau]]
+[[Grand Désert]]
+[[Chaine de Montagnes]]
+[[Forêt de Champignole]]
+]
+
 []&lt;c0|[]&lt;c1|[]&lt;c2|[]&lt;c3|
-</tw-passagedata><tw-passagedata pid="3" name="Grand Désert" tags="" position="419,486" size="100,100">(if: $attendu_fin_journee is false)[
+[]&lt;c4|
+</tw-passagedata><tw-passagedata pid="3" name="Grand Désert" tags="" position="420,486" size="100,100">&lt;script&gt;
+audio.pause();
+var audio_desert = new Audio();
+audio_desert.src = &quot;sound/desert_1.mp3&quot;;
+audio_desert.play();
+&lt;/script&gt;
+(if: $attendu_fin_journee is false)[
 Le soleil devient puissant,
 après 2 heures de marche à pied nus sur le sable,
 l&#39;intensité des rayons vous brule le visage, vous vous écroulez au sol.
@@ -65,14 +81,45 @@ Vous ne vous relevez pas et mourrez seul.
  [[Retourner au vaisseau-&gt;Jouer]]
 ]</tw-passagedata><tw-passagedata pid="4" name="Chaine de Montagnes" tags="" position="607,480" size="100,100">[[Retourner au vaisseau-&gt;Jouer]]</tw-passagedata><tw-passagedata pid="5" name="Forêt de Champignole" tags="" position="985,481" size="100,100">(if: $gourde&#39;s isCarried is true)[(set: $time to 14)]
 (link:&quot;Attendre fin de journée&quot;)[(set: $attendu_fin_journee to true)]
+&lt;script&gt;
+var audio = new Audio();
+audio.src = &quot;sound/son_ambiance_intro.mp3&quot;;
+var audio2 = new Audio(&#39;https://www.sounddesigners.org/jdownloads/_preview_files/120526__playpauseandrewind__alarm-clock-s-alarm-on.mp3&#39;);
 
-[[Retourner au vaisseau-&gt;Jouer]]</tw-passagedata><tw-passagedata pid="6" name="Fouiller le vaisseau" tags="" position="795,483" size="100,100">Vous vous approchez du vaisseau.
+function runMusic(){
+	audio.play();
+	setTimeout(function(){ audio2.play();; }, 1000);
+}
+&lt;/script&gt;
+
+[[Retourner au vaisseau-&gt;Jouer]]</tw-passagedata><tw-passagedata pid="6" name="Fouiller le vaisseau" tags="" position="795,483" size="100,100">&lt;script&gt;
+if(audio2.ended == false){
+audio2.pause();}
+&lt;/script&gt;
+Vous vous approchez du vaisseau.
+(link: &quot;Suite..&quot;)[(replace:?c1)[
 Il s’agit d’un vaisseau allongé, gris métallique et estampillé CIO sur chacun des cotés, souligné d’une bande bleu sur toute la longueur de l’appareil. Il semble être prévu pour une personne, peut-être deux. Le cockpit est brisé, un aileron est enfoncée dans le sol, l’autre n’est tout simplement plus là, probablement pulvérisée dans ce qui semble être un violent crash. Le signal d’alarme retenti toujours.
-
+(link: &quot;Suite..&quot;)[(replace:?c2)[
 Vous entrez prudemment par le cockpit. Un gyrophare rouge tourne d’un rythme effréné, donnant l’impression d’être sur le point de se propulser à travers la pièce, et de la fumée épaisse vous pique les yeux.
-
+(link: &quot;Suite..&quot;)[(replace:?c3)[
+Sur les murs se trouvent également cette inscription : CIO
+Vous tentez de désactiver l’alarme tant bien que mal quand tout à coup celle-ci se stoppe net, laissant place à une voix inquiétante et légèrement robotique :
+(link: &quot;Suite..&quot;)[(replace:?c4)[
+(dialog: &quot;PROTOCOLE D’URGENCE ACTIVÉ. AUTO DESTRUCTION DE L’APPAREIL DANS CINQ… QUATRE… TROIS… DEUX…&quot;)
+(text-colour:yellow)[PROTOCOLE D’URGENCE ACTIVÉ. AUTO DESTRUCTION DE L’APPAREIL DANS CINQ… QUATRE… TROIS… DEUX…]
+(link: &quot;Suite..&quot;)[(replace:?c5)[
+Paniqué vous commencez à bondir en direction de la sortie, quand tout à coup la voix robotique dit sur un ton enjoué :
+(link: &quot;Suite..&quot;)[(replace:?c6)[
+(dialog: &quot;IA : 
+Boum !
+Aaaaaah vous les humains vous êtes si faciles à terroriser, c’est presque plus drôle à force&quot;)
+IA :(text-colour:yellow)[
+Boum ! 
+Aaaaaah vous les humains vous êtes si faciles à terroriser, c’est presque plus drôle à force]
+]]]]]]]]]]]]
+[]&lt;c1|[]&lt;c2|[]&lt;c3|[]&lt;c4|[]&lt;c5|[]&lt;c6|
 &lt;hr/&gt;
-[[Retourner au vaisseau-&gt;Jouer]]</tw-passagedata></tw-storydata>
+[[Sortir du vaisseau-&gt;Jouer]]</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">"use strict";var _slicedToArray=function(){return function(e,t){if(Array.isArray(e))return e;if(Symbol.iterator in Object(e))return function(e,t){var n=[],r=!0,a=!1,i=void 0;try{for(var o,s=e[Symbol.iterator]();!(r=(o=s.next()).done)&&(n.push(o.value),!t||n.length!==t);r=!0);}catch(e){a=!0,i=e}finally{try{!r&&s.return&&s.return()}finally{if(a)throw i}}return n}(e,t);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e};function _defineProperty(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function _toConsumableArray(e){if(Array.isArray(e)){for(var t=0,n=Array(e.length);t<e.length;t++)n[t]=e[t];return n}return Array.from(e)}!function(){
 /**
  * @license almond 0.3.3 Copyright jQuery Foundation and other contributors.
