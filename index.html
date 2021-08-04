@@ -19,7 +19,7 @@ var audio = new Audio();
 audio.src = &quot;sound/son_ambiance_intro.mp3&quot;;
 
 var audio2 = new Audio(&#39;sound/bip_out.mp3&#39;);
-
+audio2.volume = 0.5;
 
 function runMusic(){
 	audio.play();
@@ -86,6 +86,7 @@ Vous ne vous relevez pas et mourrez seul.
 if(audio2.ended == false){
 audio2.pause();}
 var bip_in = new Audio(&quot;sound/bip_in.mp3&quot;);
+bip_in.volume = 0.5;
 bip_in.play();
 var bip_alert = new Audio(&quot;sound/bip_auto_dest.mp3&quot;);
 &lt;/script&gt;
@@ -97,14 +98,13 @@ Vous entrez prudemment par le cockpit. Un gyrophare rouge tourne d’un rythme e
 (link: &quot;Suite..&quot;)[(replace:?c3)[
 Sur les murs se trouvent également cette inscription : CIO
 Vous tentez de désactiver l’alarme tant bien que mal quand tout à coup celle-ci se stoppe net, laissant place à une voix inquiétante et légèrement robotique :
-(link: &quot;Suite..&quot;)[&lt;script&gt;bip_in.pause();bip_alert.play();&lt;/script&gt;(replace:?c4)[
+(link: &quot;Suite..&quot;)[&lt;script&gt;audio.pause();bip_in.pause();bip_alert.play();&lt;/script&gt;(replace:?c4)[
 (dialog: &quot;PROTOCOLE D’URGENCE ACTIVÉ. AUTO DESTRUCTION DE L’APPAREIL DANS CINQ… QUATRE… TROIS… DEUX…&quot;)
 (text-colour:yellow)[PROTOCOLE D’URGENCE ACTIVÉ. AUTO DESTRUCTION DE L’APPAREIL DANS CINQ… QUATRE… TROIS… DEUX…]
 (link: &quot;Suite..&quot;)[(replace:?c5)[
 Paniqué vous commencez à bondir en direction de la sortie, quand tout à coup la voix robotique dit sur un ton enjoué :
 (link: &quot;Suite..&quot;)[(replace:?c6)[
-(dialog: &quot;IA : 
-Boum !
+(dialog: &quot;Boum !
 Aaaaaah vous les humains vous êtes si faciles à terroriser, c’est presque plus drôle à force&quot;)(text-colour:white)[IA : ](text-colour:yellow)[ Boum ! 
 Aaaaaah vous les humains vous êtes si faciles à terroriser, c’est presque plus drôle à force]&lt;script&gt;bip_alert.pause();&lt;/script&gt;
 
