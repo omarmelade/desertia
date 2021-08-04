@@ -110,8 +110,7 @@ Aaaaaah vous les humains vous êtes si faciles à terroriser, c’est presque pl
 
 (text-colour:white)[Interloqué, vous vous remettez de vos emotions.]
 (link: &quot;Heuu.. Bonjours ?&quot;)[(replace:?c7)[
-(dialog: &quot;Bon jour ? Hmm ça dépend pour qui, il est vrai que je passe une journée particulièrement radieuse, mais il semblerait que ce soit pas le cas de tout le monde.&quot;, &quot;Vous êtes qu.. quoi ?&quot;)
-(text-colour:white)[Vous : ](text-colour:yellow)[Heuu.. Bonjours ?]
+(dialog: &quot;Bon jour ? Hmm ça dépend pour qui, il est vrai que je passe une journée particulièrement radieuse, mais il semblerait que ce soit pas le cas de tout le monde.&quot;, &quot;Vous êtes qu.. quoi ?&quot;)(text-colour:white)[Vous : ](text-colour:yellow)[Heuu.. Bonjours ?]
 (text-colour:white)[IA : ](text-colour:yellow)[Bon jour ? Hmm ça dépend pour qui, il est vrai que je passe une journée particulièrement radieuse, mais il semblerait que ce soit pas le cas de tout le monde.]
 (text-colour:white)[Vous : ](text-colour:yellow)[Vous êtes qu.. quoi ?]
 (dialog: &quot;Voilà qui est extrêmement intéressant ! Tu ne te souviens pas de moi ?&quot;, &quot;De pas grand choses à vrai dire…&quot;)
@@ -120,8 +119,8 @@ Aaaaaah vous les humains vous êtes si faciles à terroriser, c’est presque pl
 (dialog: &quot;Mais quelle journée fantastique !&quot;, &quot;Heu..Sympa... Bon du coup&quot;)
 (text-colour:white)[IA : ](text-colour:yellow)[Mais quelle journée fantastique !]
 (text-colour:white)[Vous : ](text-colour:yellow)[Heu..Sympa... Bon du coup]
-(set: $reponse1 to (confirm: &quot;Vous êtes intrigué et interroger votre compagnon.&quot;, &quot;J’étais le conducteur de ce vaisseau ?&quot;, &quot;Où sommes-nous ?&quot;))(set: $dial1_0 to &quot;A ton avis le bipède ? Regarde ta tenue, c’est écrit quoi dessus ? Ouiii CIO c’est bien ! Et sur les parois autour de nous ? Encore CIO, bravoooo, j’ai rarement vu un primate aussi vif !&quot;)
-(set: $dial1_1 to &quot;Tu t’es écrasé andouille, je me demande où tu as appris à piloter d’ailleurs haha. Enfin je le sais, mais t’es nul ! Quand à l’endroit précis où nous sommes, je vais bien me garder de te le dire pour le moment.&quot;)[Vous êtes intrigué et interroger votre compagnon.]
+(set: $reponse1 to (confirm: &quot;IA : Bon, je te laisse me poser une seule question.&quot;, &quot;J’étais le conducteur de ce vaisseau ?&quot;, &quot;Où sommes-nous ?&quot;))(set: $dial1_0 to &quot;A ton avis le bipède ? Regarde ta tenue, c’est écrit quoi dessus ? Ouiii CIO c’est bien ! Et sur les parois autour de nous ? Encore CIO, bravoooo, j’ai rarement vu un primate aussi vif !&quot;)
+(set: $dial1_1 to &quot;Tu t’es écrasé andouille, je me demande où tu as appris à piloter d’ailleurs haha. Enfin je le sais, mais t’es nul ! Quand à l’endroit précis où nous sommes, je vais bien me garder de te le dire pour le moment.&quot;)(text-colour:white)[IA : ](text-colour:yellow)[Bon, je te laisse me poser une seule question.]
 (if: $reponse1 is false)[(dialog: $dial1_0, &quot;Bon à part à être désagréable tu sert à quoi ?&quot;)
 (text-colour:white)[Vous : ](text-colour:yellow)[J’étais le conducteur de ce vaisseau ?]
 (text-colour:white)[IA : ](text-colour:yellow)[$dial1_0]
