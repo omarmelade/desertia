@@ -11,6 +11,34 @@
 <tw-story><noscript><tw-noscript>JavaScript needs to be enabled to play Desertia.</tw-noscript></noscript></tw-story>
 <tw-storydata name="Desertia" startnode="1" creator="Twine" creator-version="2.3.14" ifid="8AA6DF50-7599-47E2-95B5-0E6723763349" zoom="1" format="Harlowe" format-version="3.2.2" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">tw-sidebar {
 	display: none;
+}
+
+@font-face {
+  font-family: "Demode";
+  src: url("font/demode.ttf");
+}
+
+@font-face {
+  font-family: "Blocky Gods";
+  src: url("font/blocky_gods.ttf");
+}
+
+#big{
+  font-size:125px;
+  margin-left:60px;
+  color:#fb987d;
+  text-shadow: 4px 4px #fbbfae;;
+}
+#planet{
+  max-width: 200px;
+  max-height: 200px;
+  margin: auto 0;
+}
+
+.box{
+  width: 100%;
+  height: 275px;
+  display: inline-flex; 
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Passage sans titre" tags="" position="723,179" size="100,100">&lt;link rel=&quot;shortcut icon&quot; href=&quot;favicon.ico&quot;/&gt; 
 &lt;script&gt;
 const audio = new Audio();
@@ -18,7 +46,7 @@ audio.src = &#39;sound/son_ambiance_intro.mp3&#39;;
 
 const audio2 = new Audio();
 audio2.src = &#39;sound/bip_out.mp3&#39;;
-audio2.volume = 0.2;
+audio2.volume = 0.1;
 
 const audio_montagne = new Audio();
 audio_montagne.src = &#39;sound/montagne_1.mp3&#39;;
@@ -36,11 +64,12 @@ function runMusic(){
 	setTimeout(function(){ audio2.play(); }, 1000);
 }
 &lt;/script&gt;
-#Desertia
+&lt;div class=&quot;out&quot;&gt;&lt;div class=&quot;box&quot;&gt;
+&lt;img id=&quot;planet&quot; src=&quot;desertia.png&quot; /&gt;
+(font:&quot;Blocky Gods&quot;)+(text-style:&quot;expand&quot;)[&lt;p id=&quot;big&quot;&gt;Desertia&lt;/p&gt;]
+&lt;/div&gt;&lt;/div&gt;
 
 Vous êtes perdu, autant mentalement que géographiquement, votre but est simple : survivre à cette planète déserte qui paraît calme et vivable au premiers abors.
-
-
 =&gt;&lt;=
 &lt;div id=&quot;title-jouer&quot;&gt;
 &lt;a onClick=&quot;runMusic()&quot; id=&quot;jouerbtn&quot;&gt;(button:)[[Jouer]]&lt;/a&gt;
@@ -51,19 +80,17 @@ Vous êtes perdu, autant mentalement que géographiquement, votre but est simple
 (set: $ia to (datamap: &quot;name&quot;, &quot;IA&quot;, &quot;isCarried&quot;, false))
 (set: $gourde to (datamap: &quot;name&quot;, &quot;Gourde&quot;, &quot;isCarried&quot;, false))
 (set: $soulier to (datamap: &quot;name&quot;, &quot;Chaussures&quot;, &quot;isCarried&quot;, false))</tw-passagedata><tw-passagedata pid="2" name="Jouer" tags="" position="725,325" size="100,100">(if:(history: )&#39;s length &lt; 2)[
-*BIP BIP BIP BIP BIP*
-(link: &quot;Se réveiller&quot;)[(replace:?c0)[
-Réveillé par son strident et répétitif semblable à une alarme, vous ouvrez péniblement les yeux.
+(align:&quot;=&gt;&lt;=&quot;)+(box:&quot;=XXXXXXXX=&quot;)[#*BIP BIP BIP BIP BIP*](link: &quot;Se réveiller&quot;)[(t8n: &quot;fade&quot;)+(replace:?c0)[Réveillé par son strident et répétitif semblable à une alarme, vous ouvrez péniblement les yeux.
 Le soleil, déjà haut dans le ciel vous éblouis, il fait très chaud et vous avez la gorge aussi sèche que le desert aride que vous remarquez non loin de l’endroit où vous êtes étendus. L’esprit embrumé et les souvenirs flous vous réalisez tout de même que vous allez devoir vite trouver de l’eau, à moins de vous diriger vers une mort certaine.
-(link: &quot;Suite..&quot;)[(replace:?c1)[
+(link: &quot;Suite..&quot;)[(t8n: &quot;fade&quot;)+(replace:?c1)[
 Vous avez tout d’abord l’impression que cette étendue de sable et de rochers grandit à vue d’oeil, comme si elle n’avait pas de fin, mais en vous concentrant vous distinguez à l’horizon une fine bande bleu se détachant du ciel. 
-(link: &quot;Suite..&quot;)[(replace:?c2)[
+(link: &quot;Suite..&quot;)[(t8n: &quot;fade&quot;)+(replace:?c2)[
 Un mirage sans doute, ou peut-être un océan, qui sait ..?
 Vous vous relevez et constatez que vous êtes pieds nus. Vous êtes dans une plaine dont l’herbe est asséchée par la chaleur et à côté de vous se trouve un vaisseau en piteux état d’où provient le signal aigu qui vous a désagréablement tiré de votre profond sommeil. 
-(link: &quot;Suite..&quot;)[(replace:?c3)[
+(link: &quot;Suite..&quot;)[(t8n: &quot;fade&quot;)+(replace:?c3)[
 Vous voyez débuter à quelques kilomètres de là une grande chaîne de montagnes dont les rochers ont l’air particulièrement tranchants et peu praticables, ainsi qu’une forêt d’arbres immenses dont la densité semble protéger efficacement des rayons brûlants du soleil, et vous constatez que les feuillages forment un genre de dôme qui vous évoque assez facilement le chapeau d’un champignon.
-&lt;hr/&gt;
-[[Fouiller le vaisseau]]]
+
+&lt;hr/&gt;[[Fouiller le vaisseau]]]
 ]]]]]]]]
 (else:)[
 &lt;script&gt;
@@ -127,45 +154,46 @@ bip_in.play();
 var bip_alert = new Audio(&quot;sound/bip_auto_dest.mp3&quot;);
 &lt;/script&gt;
 Vous vous approchez du vaisseau.
-(link: &quot;Suite..&quot;)[(replace:?c1)[
+(link: &quot;Suite..&quot;)[(t8n: &quot;fade&quot;)+(replace:?c1)[
 Il s’agit d’un vaisseau allongé, gris métallique et estampillé CIO sur chacun des cotés, souligné d’une bande bleu sur toute la longueur de l’appareil. Il semble être prévu pour une personne, peut-être deux. Le cockpit est brisé, un aileron est enfoncée dans le sol, l’autre n’est tout simplement plus là, probablement pulvérisée dans ce qui semble être un violent crash. Le signal d’alarme retenti toujours.
-(link: &quot;Suite..&quot;)[(replace:?c2)[
+(link: &quot;Suite..&quot;)[(t8n: &quot;fade&quot;)+(replace:?c2)[
 Vous entrez prudemment par le cockpit. Un gyrophare rouge tourne d’un rythme effréné, donnant l’impression d’être sur le point de se propulser à travers la pièce, et de la fumée épaisse vous pique les yeux.
-(link: &quot;Suite..&quot;)[(replace:?c3)[
+(link: &quot;Suite..&quot;)[(t8n: &quot;fade&quot;)+(replace:?c3)[
 Sur les murs se trouvent également cette inscription : CIO
 Vous tentez de désactiver l’alarme tant bien que mal quand tout à coup celle-ci se stoppe net, laissant place à une voix inquiétante et légèrement robotique :
-(link: &quot;Suite..&quot;)[&lt;script&gt;audio.pause();bip_in.pause();bip_alert.play();&lt;/script&gt;(replace:?c4)[
+(link: &quot;Suite..&quot;)[&lt;script&gt;audio.pause();bip_in.pause();bip_alert.play();&lt;/script&gt;(t8n: &quot;fade&quot;)+(replace:?c4)[
 (dialog: &quot;PROTOCOLE D’URGENCE ACTIVÉ. AUTO DESTRUCTION DE L’APPAREIL DANS CINQ… QUATRE… TROIS… DEUX…&quot;)
-(text-colour:yellow)[PROTOCOLE D’URGENCE ACTIVÉ. AUTO DESTRUCTION DE L’APPAREIL DANS CINQ… QUATRE… TROIS… DEUX…]
-(link: &quot;Suite..&quot;)[(replace:?c5)[
+(t8n: &quot;fade&quot;)+(text-colour:yellow)[PROTOCOLE D’URGENCE ACTIVÉ. AUTO DESTRUCTION DE L’APPAREIL DANS CINQ… QUATRE… TROIS… DEUX…]
+(link: &quot;Suite..&quot;)[(t8n: &quot;fade&quot;)+(replace:?c5)[
 Paniqué vous commencez à bondir en direction de la sortie, quand tout à coup la voix robotique dit sur un ton enjoué :
-(link: &quot;Suite..&quot;)[(replace:?c6)[
+(link: &quot;Suite..&quot;)[(t8n: &quot;fade&quot;)+(replace:?c6)[
 (dialog: &quot;Boum !
-Aaaaaah vous les humains vous êtes si faciles à terroriser, c’est presque plus drôle à force&quot;)(text-colour:white)[Voix : ](text-colour:yellow)[ Boum ! 
+Aaaaaah vous les humains vous êtes si faciles à terroriser, c’est presque plus drôle à force&quot;)(t8n: &quot;fade&quot;)+(text-colour:white)[Voix : ](t8n: &quot;fade&quot;)+(text-colour:yellow)[ Boum ! 
 Aaaaaah vous les humains vous êtes si faciles à terroriser, c’est presque plus drôle à force]&lt;script&gt;bip_alert.pause();&lt;/script&gt;
 
-(text-colour:white)[Interloqué, vous vous remettez de vos emotions.]
-(link: &quot;Heuu.. Bonjours ?&quot;)[(replace:?c7)[
+(t8n: &quot;fade&quot;)+(text-colour:white)[Interloqué, vous vous remettez de vos emotions.]
+(link: &quot;Heuu.. Bonjours ?&quot;)[(t8n: &quot;fade&quot;)+(replace:?c7)[
 (dialog: &quot;Bon jour ? Hmm ça dépend pour qui, il est vrai que je passe une journée particulièrement radieuse, mais il semblerait que ce soit pas le cas de tout le monde.&quot;, &quot;Vous êtes qu.. quoi ?&quot;)
 (text-colour:white)[
-(align:&quot;==&gt;&quot;)+(box:&quot;=X&quot;)[Vous : (text-colour:blue)[Heuu.. Bonjours ?]]
-(text-colour:white)[Voix : ](text-colour:yellow)[Bon jour ? Hmm ça dépend pour qui, il est vrai que je passe une journée particulièrement radieuse, mais il semblerait que ce soit pas le cas de tout le monde.]
-(align:&quot;==&gt;&quot;)+(box:&quot;=X&quot;)[Vous : (text-colour:blue)[Vous êtes qu.. quoi ?]]
+(t8n: &quot;fade&quot;)+(align:&quot;==&gt;&quot;)+(box:&quot;=X&quot;)[Vous : (text-colour:blue)[Heuu.. Bonjours ?]]
+(t8n: &quot;fade&quot;)+(text-colour:white)[Voix : ](text-colour:yellow)[Bon jour ? Hmm ça dépend pour qui, il est vrai que je passe une journée particulièrement radieuse, mais il semblerait que ce soit pas le cas de tout le monde.]
+(t8n: &quot;fade&quot;)+(align:&quot;==&gt;&quot;)+(box:&quot;=X&quot;)[Vous : (text-colour:blue)[Vous êtes qu.. quoi ?]]
 (dialog: &quot;Voilà qui est extrêmement intéressant ! Tu ne te souviens pas de moi ?&quot;, &quot;De pas grand choses à vrai dire…&quot;)
-(text-colour:white)[Voix : ](text-colour:yellow)[Voilà qui est extrêmement intéressant ! Tu ne te souviens pas de moi ?]
-(align:&quot;==&gt;&quot;)+(box:&quot;=X&quot;)[Vous : (text-colour:blue)[De pas grand choses à vrai dire…]]
+(t8n: &quot;fade&quot;)+(text-colour:white)[Voix : ](t8n: &quot;fade&quot;)+(text-colour:yellow)[Voilà qui est extrêmement intéressant ! Tu ne te souviens pas de moi ?]
+(t8n: &quot;fade&quot;)+(align:&quot;==&gt;&quot;)+(box:&quot;=X&quot;)[Vous : (text-colour:blue)[De pas grand choses à vrai dire…]]
 (dialog: &quot;Mais quelle journée fantastique !&quot;, &quot;Heu..Sympa... Bon du coup&quot;)
-(text-colour:white)[Voix : ](text-colour:yellow)[Mais quelle journée fantastique !]
-(align:&quot;==&gt;&quot;)+(box:&quot;=X&quot;)[Vous : (text-colour:blue)[Heu..Sympa...]]
+(t8n: &quot;fade&quot;)+(text-colour:white)[Voix : ](t8n: &quot;fade&quot;)+(text-colour:yellow)[Mais quelle journée fantastique !]
+(t8n: &quot;fade&quot;)+(align:&quot;==&gt;&quot;)+(box:&quot;=X&quot;)[Vous : (text-colour:blue)[Heu..Sympa...]]
 (set: $reponse1 to (confirm: &quot;Bon, je te laisse me poser une seule question.&quot;, &quot;J’étais le conducteur de ce vaisseau ?&quot;, &quot;Où sommes-nous ?&quot;))(set: $dial1_0 to &quot;A ton avis le bipède ? Regarde ta tenue, c’est écrit quoi dessus ? Ouiii CIO c’est bien ! Et sur les parois autour de nous ? Encore CIO, bravoooo, j’ai rarement vu un primate aussi vif !&quot;)
-(set: $dial1_1 to &quot;Tu t’es écrasé andouille, je me demande où tu as appris à piloter d’ailleurs haha. Enfin je le sais, mais t’es nul ! Quand à l’endroit précis où nous sommes, je vais bien me garder de te le dire pour le moment.&quot;)(text-colour:white)[Voix : ](text-colour:yellow)[Bon, je te laisse me poser une seule question.]
+(set: $dial1_1 to &quot;Tu t’es écrasé andouille, je me demande où tu as appris à piloter d’ailleurs haha. Enfin je le sais, mais t’es nul ! Quand à l’endroit précis où nous sommes, je vais bien me garder de te le dire pour le moment.&quot;)(t8n: &quot;fade&quot;)+(text-colour:white)[Voix : ](t8n: &quot;fade&quot;)+(text-colour:yellow)[Bon, je te laisse me poser une seule question.]
 (if: $reponse1 is false)[(dialog: $dial1_0, &quot;Bon à part à être désagréable tu sert à quoi ?&quot;)
-(align:&quot;==&gt;&quot;)+(box:&quot;=X&quot;)[Vous : (text-colour:blue)[J’étais le conducteur de ce vaisseau ?]]
-(text-colour:white)[Voix : ](text-colour:yellow)[$dial1_0]
+(t8n: &quot;fade&quot;)+(align:&quot;==&gt;&quot;)+(box:&quot;=X&quot;)[Vous : (text-colour:blue)[J’étais le conducteur de ce vaisseau ?]]
+(t8n: &quot;fade&quot;)+(text-colour:white)[Voix : ](t8n: &quot;fade&quot;)+(text-colour:yellow)[$dial1_0]
 ](else:)[(dialog: $dial1_1, &quot;Bon à part à être désagréable tu sert à quoi ?&quot;)
-(align:&quot;==&gt;&quot;)+(box:&quot;=X&quot;)[Vous : (text-colour:blue)[Où sommes-nous ?]]
-(text-colour:white)[Voix : ](text-colour:yellow)[$dial1_1]]
-(align:&quot;==&gt;&quot;)+(box:&quot;=X&quot;)[Vous : (text-colour:blue)[Bon à part à être désagréable tu sert à quoi ?]]
+(t8n: &quot;fade&quot;)+(align:&quot;==&gt;&quot;)+(box:&quot;=X&quot;)[Vous : (text-colour:blue)[Où sommes-nous ?]]
+(t8n: &quot;fade&quot;)+(text-colour:white)[Voix : ](t8n: &quot;fade&quot;)+(text-colour:yellow)[$dial1_1]]
+(t8n: &quot;fade&quot;)+(align:&quot;==&gt;&quot;)+(box:&quot;=X&quot;)[Vous : (text-colour:blue)[Bon à part à être désagréable tu sert à quoi ?]]
+
 (text-colour:white)[&lt;hr/&gt;
 (text-colour:blue)[[Sortir du vaisseau-&gt;Jouer]]]]
 ]]]]]]]]]]]]]]
